@@ -6,6 +6,7 @@ import re
 
 COURSE_TABLE_NAME = "uiuc_courses"
 SECTION_TABLE_NAME = "uiuc_sections"
+DATABASE_NAME = "/home/smiley325/projects/uiucinfometrics/uiuc_course_catalog.db"
 
 # ---------------------------------------------------
 # UIUC Catalog AJAX version
@@ -16,7 +17,7 @@ def to_military(time_string):
 	return (int(timeMatch.group('hour')) % 12 * 100 + int(timeMatch.group('minute')) + (0, 1200)[timeMatch.group('ampm') == 'PM'])
 
 def query_class(className):
-	connection = sqlite.connect('/home/smiley325/projects/uiucinfometrics/uiuc_course_catalog.db')
+	connection = sqlite.connect(DATABASE_NAME)
 	cursor = connection.cursor()
 		
 	classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)
@@ -47,5 +48,5 @@ def query_class(className):
 			except KeyError:
 				sectionTable[section[3]] = [timeStart]
 				
-	return json.jumps(sectionTable)
+	return json.dumps(sectionTable)
 			

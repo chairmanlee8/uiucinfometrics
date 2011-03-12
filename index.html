@@ -4,14 +4,21 @@
     
     <script type="text/javascript" src="jquery-1.5.1.min.jz" />
     <script type="text/javascript">
+        function get_class_info()
+        {
+            alert("hello");
+        }
     </script>
 </head>
 
 <body>
     <form id="class_form">
         <input type="text" name="class" />
-        <input type="button" value="Get Info" />
-    </form>
+        <input type="button" value="Get Info" onclick="javascript:get_class_info();" />
+    </form><br/>
+    
+    <div id="output_div">
+    </div>
 </body>
 
 </html>

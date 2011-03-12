@@ -16,7 +16,7 @@ def to_military(time_string):
 	return (int(timeMatch.group('hour')) % 12 * 100 + int(timeMatch.group('minute')) + (0, 1200)[timeMatch.group('ampm') == 'PM'])
 
 def query_class(className):
-	connection = sqlite.connect('uiuc_course_catalog.db', isolation_level=None)
+	connection = sqlite.connect('uiuc_course_catalog.db')
 	cursor = connection.cursor()
 		
 	classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)

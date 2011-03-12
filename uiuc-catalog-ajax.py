@@ -22,7 +22,7 @@ def query_class(className):
 		
 	classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)
 
-	classDept = classToken.group('department')
+	classDept = classToken.group('department').upper()
 	classNumber = classToken.group('number')
 
 	cursor.execute("SELECT * FROM %s WHERE subject=\"%s\" AND number=%s" % (COURSE_TABLE_NAME, classDept, classNumber))

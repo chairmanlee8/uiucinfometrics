@@ -7,12 +7,12 @@
         function get_class_info()
         {
             var theClassName = $('#class_form > input[name=class]').val();
-            alert(theClassName);
             
             $.post(
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
+                    alert(data);
                 }
             );
         }

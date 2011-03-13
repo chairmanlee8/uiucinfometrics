@@ -12,7 +12,14 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
-                    $("#output_div").html("");
+                    $("#output_div").html("<table><tr>");
+                    
+                    for(var section in data)
+                    {
+                        $("#output_div").append("<td>" + section + "</td>");
+                    }
+                    
+                    $("#output_div").append("</tr><tr>");
                     
                     // Create histograms                    
                     for(var section in data)
@@ -39,7 +46,7 @@
                         // Make google charts API url and add img tag
                         var chartApiParams = new Object;
                         
-                        chartApiParams["chtt"] = section.replace(/\s+/g, "+");
+                        //chartApiParams["chtt"] = section.replace(/\s+/g, "+");
                         chartApiParams["chbh"] = "a";
                         chartApiParams["cht"] = "bvs";
                         chartApiParams["chs"] = String(barCount * 25 + 50) + "x150";
@@ -66,8 +73,10 @@
                             chartApiUrl += i + "=" + chartApiParams[i] + "&";
                         }
                         
-                        $("#output_div").html($("#output_div").html() + "<img src=\"" + chartApiUrl + "\" />");
+                        $("#output_div").append("<td><img src=\"" + chartApiUrl + "\" /></td>");
                     }
+                    
+                    $("#output_div").append("</tr></table>");
                 },
                 "json"
             );

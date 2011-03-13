@@ -13,6 +13,14 @@
                 function(data)
                 {
                     $('#output_div').html(data);
+                    
+                    // Create histogram arrays
+                    var histograms = new Object;
+                    
+                    for(var section in data)
+                    {
+                        alert(section);
+                    }
                 }
             );
         }
@@ -26,6 +34,9 @@
     </form>
     
     <div id="output_div">
+    </div>
+    
+    <div id="chart_div">
     </div>
 </body>
 

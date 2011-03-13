@@ -12,11 +12,9 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
-                    //$('#output_div').html(String(data.toSource()));
+                    $("#output_div").html("");
                     
-                    // Create histogram arrays
-                    var histograms = new Object;
-                    
+                    // Create histograms                    
                     for(var section in data)
                     {
                         var thisHistogram = new Object;
@@ -25,26 +23,36 @@
                         {
                             var startHour = data[section][i];
                             
-                            if(startHour in thisHistogram)
-                            {
-                                thisHistogram[startHour] += 1;
-                            }
-                            else
-                            {
-                                thisHistogram[startHour] = 1;
-                            }
+                            if(startHour in thisHistogram) thisHistogram[startHour] += 1;
+                            else thisHistogram[startHour] = 1;
                         }
                         
-                        histograms[section] = thisHistogram;
-                    }
-                    
-                    if(JSON)
-                    {
-                        $("#output_div").html(JSON.stringify(histograms));
-                    }
-                    else
-                    {
-                        $("#output_div").html("JSON object not found.");
+                        // Make google charts API url and add img tag
+                        var chartApiParams = new Object;
+                        
+                        chartApiParams["cht"] = "bvs";
+                        chartApiParams["chco"] = "C6D9FD";
+                        chartApiParams["chd"] = "t:";
+                        chartApiParams["chxt"] = "x,y";
+                        chartApiParams["chxl"] = "0:";
+                        
+                        for(var hour in thisHistogram)
+                        {
+                            chartApiParams["chxl"] += "|" + hour;
+                            chartApiParams["chd"] += String(thisHistogram[hour]) + ",";
+                        }
+                        
+                        // Remove last comma from ["chd"]
+                        chartApiParams["chd"] = chartApiParams["chd"].slice(0, chartApiParams["chd"].length() - 1);
+                        
+                        var chartApiUrl = "https://chart.googleapis.com/chart?";
+                        
+                        for(var i in chartApiParams)
+                        {
+                            chartApiUrl += i + "=" + chartApiParams[i] + "&";
+                        }
+                        
+                        $("#output_div").html($("#output_div").html() + chartApiUrl + "<br/>");
                     }
                 },
                 "json"

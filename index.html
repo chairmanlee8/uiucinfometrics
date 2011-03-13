@@ -28,8 +28,11 @@
                         }
                         
                         var maxValue = 0;
+                        var barCount = 0;
+                        
                         for(var i in thisHistogram)
                         {
+                            barCount += 1;
                             maxValue = Math.max(maxValue, thisHistogram[i]);
                         }
                         
@@ -39,7 +42,7 @@
                         chartApiParams["chtt"] = section.replace(/\s+/g, "+");
                         chartApiParams["chbh"] = "a";
                         chartApiParams["cht"] = "bvs";
-                        chartApiParams["chs"] = "250x150";
+                        chartApiParams["chs"] = String(barCount * 20) + "x150";
                         chartApiParams["chds"] = "0," + String(maxValue);
                         chartApiParams["chxr"] = "1,0," + String(maxValue);
                         chartApiParams["chco"] = "C6D9FD";

@@ -21,15 +21,17 @@
                     {
                         var thisHistogram = new Object;
                         
-                        for(var startHour in data[section])
+                        for(var i in data[section])
                         {
-                            if(String(startHour) in thisHistogram)
+                            var startHour = data[section][i];
+                            
+                            if(startHour in thisHistogram)
                             {
-                                thisHistogram[String(startHour)] += 1;
+                                thisHistogram[startHour] += 1;
                             }
                             else
                             {
-                                thisHistogram[String(startHour)] = 1;
+                                thisHistogram[startHour] = 1;
                             }
                         }
                         

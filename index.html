@@ -12,7 +12,7 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
-                    $('#output_div').html(data);
+                    $('#output_div').html(String(data));
                     
                     // Create histogram arrays
                     var histograms = new Object;

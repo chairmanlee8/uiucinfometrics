@@ -43,6 +43,12 @@
                             maxValue = Math.max(maxValue, thisHistogram[i]);
                         }
                         
+                        // Normalize values to [0,100]
+                        for(var i in thisHistogram)
+                        {
+                            thisHistogram[i] = (thisHistogram[i] * 100.0 / maxValue);
+                        }
+                        
                         // Make google charts API url and add img tag
                         var chartApiParams = new Object;
                         

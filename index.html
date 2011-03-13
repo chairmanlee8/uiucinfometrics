@@ -31,7 +31,8 @@
                         var chartApiParams = new Object;
                         
                         chartApiParams["cht"] = "bvs";
-                        chartApiParams["chs"] = "150x150";
+                        chartApiParams["chs"] = "200x150";
+                        chartApiParams["chds"] = "0," + String(Math.max.apply(null, thisHistogram));
                         chartApiParams["chco"] = "C6D9FD";
                         chartApiParams["chd"] = "t:";
                         chartApiParams["chxt"] = "x,y";

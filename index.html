@@ -27,12 +27,18 @@
                             else thisHistogram[startHour] = 1;
                         }
                         
+                        var maxValue = 0;
+                        for(var i in thisHistogram)
+                        {
+                            maxValue = Math.max(maxValue, thisHistogram[i]);
+                        }
+                        
                         // Make google charts API url and add img tag
                         var chartApiParams = new Object;
                         
                         chartApiParams["cht"] = "bvs";
                         chartApiParams["chs"] = "200x150";
-                        chartApiParams["chds"] = "0," + String(Math.max.apply(null, thisHistogram));
+                        chartApiParams["chds"] = "0," + String(maxValue);
                         chartApiParams["chco"] = "C6D9FD";
                         chartApiParams["chd"] = "t:";
                         chartApiParams["chxt"] = "x,y";

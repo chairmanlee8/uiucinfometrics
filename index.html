@@ -12,14 +12,37 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
-                    $('#output_div').html(String(data.toSource()));
+                    //$('#output_div').html(String(data.toSource()));
                     
                     // Create histogram arrays
                     var histograms = new Object;
                     
                     for(var section in data)
                     {
-                        alert(section);
+                        var thisHistogram = new Object;
+                        
+                        for(var startHour in data[section])
+                        {
+                            if(String(startHour) in thisHistogram)
+                            {
+                                thisHistogram[String(startHour)] += 1;
+                            }
+                            else
+                            {
+                                thisHistogram[String(startHour)] = 1;
+                            }
+                        }
+                        
+                        histograms[section] = thisHistogram;
+                    }
+                    
+                    if(JSON)
+                    {
+                        $("#output_div").html(JSON.stringify(histograms));
+                    }
+                    else
+                    {
+                        $("#output_div").html("JSON object not found.");
                     }
                 },
                 "json"
@@ -35,9 +58,6 @@
     </form>
     
     <div id="output_div">
-    </div>
-    
-    <div id="chart_div">
     </div>
 </body>
 

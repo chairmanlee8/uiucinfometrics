@@ -12,14 +12,14 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
-                    $("#output_div").html("<table><tr>");
-                    
+                    var outputHtml = "<table><tr>";
+                                        
                     for(var section in data)
                     {
-                        $("#output_div").append("<th>" + section + "</th>");
+                        outputHtml += "<th>" + section + "</th>";
                     }
                     
-                    $("#output_div").append("</tr><tr>");
+                    outputHtml += "</tr><tr>";
                     
                     // Create histograms                    
                     for(var section in data)
@@ -49,7 +49,7 @@
                         //chartApiParams["chtt"] = section.replace(/\s+/g, "+");
                         chartApiParams["chbh"] = "25";
                         chartApiParams["cht"] = "bvs";
-                        chartApiParams["chs"] = String(barCount * 25 + 50) + "x150";
+                        chartApiParams["chs"] = String(barCount * 25 + 75) + "x150";
                         chartApiParams["chds"] = "0," + String(maxValue);
                         chartApiParams["chxr"] = "1,0," + String(maxValue);
                         chartApiParams["chco"] = "C6D9FD";
@@ -73,10 +73,11 @@
                             chartApiUrl += i + "=" + chartApiParams[i] + "&";
                         }
                         
-                        $("#output_div").append("<td><img src=\"" + chartApiUrl + "\" /></td>");
+                        outputHtml += "<td><img src=\"" + chartApiUrl + "\" /></td>";
                     }
                     
-                    $("#output_div").append("</tr></table>");
+                    outputHtml += "</tr></table>";
+                    $("#output_div").html(outputHtml);
                 },
                 "json"
             );

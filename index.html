@@ -12,6 +12,12 @@
                 'uiuc-catalog-ajax.py/query_class', {'className': theClassName},
                 function(data)
                 {
+                    if("error" in data)
+                    {
+                        $("#output_div").html("Error retrieving class.");
+                        return;
+                    }
+                    
                     var outputHtml = "<table><tr>";
                                         
                     for(var section in data)

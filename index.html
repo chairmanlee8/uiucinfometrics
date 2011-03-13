@@ -49,7 +49,7 @@
                         
                         for(var i in chartApiParams)
                         {
-                            chartApiUrl += i + "=" + chartApiParams[i] + "&amp;";
+                            chartApiUrl += i + "=" + chartApiParams[i] + "&";
                         }
                         
                         $("#output_div").html($("#output_div").html() + "<img src=\"" + chartApiUrl + "\" /><br/>");

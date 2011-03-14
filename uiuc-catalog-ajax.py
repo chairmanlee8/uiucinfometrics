@@ -15,6 +15,17 @@ DATABASE_NAME = "/home/smiley325/projects/uiucinfometrics/uiuc_course_catalog.db
 def to_military(time_string):
 	timeMatch = re.match(r'(?P<hour>\d+):(?P<minute>\d+)\s*(?P<ampm>[AMP]+)', time_string)
 	return (int(timeMatch.group('hour')) % 12 * 100 + int(timeMatch.group('minute')) + (0, 1200)[timeMatch.group('ampm') == 'PM'])
+    
+# query_class_offers: returns seasons in which the class is offered, for example
+# [ {2010, "spring"}, {2008, "fall"}, ... ]
+def query_class_offers(className):
+    connection = sqlite.connect(DATABASE_NAME)
+	cursor = connection.cursor()
+		
+	classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)
+    
+    classDept = classToken.group('department').upper()
+	classNumber = classToken.group('number')
 
 def query_class(className):
 	connection = sqlite.connect(DATABASE_NAME)

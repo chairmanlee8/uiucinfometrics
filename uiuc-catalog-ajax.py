@@ -26,6 +26,8 @@ def query_class_offers(className):
     
     classDept = classToken.group('department').upper()
 	classNumber = classToken.group('number')
+    
+    return
 
 def query_class(className):
 	connection = sqlite.connect(DATABASE_NAME)

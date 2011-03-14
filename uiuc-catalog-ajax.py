@@ -20,12 +20,12 @@ def to_military(time_string):
 # [ {2010, "spring"}, {2008, "fall"}, ... ]
 def query_class_offers(className):
     connection = sqlite.connect(DATABASE_NAME)
-	cursor = connection.cursor()
-		
-	classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)
+    cursor = connection.cursor()
+	
+    classToken = re.match('(?P<department>[a-zA-Z]+)(?P<number>\d+)', className)
     
     classDept = classToken.group('department').upper()
-	classNumber = classToken.group('number')
+    classNumber = classToken.group('number')
     
     return 0
 

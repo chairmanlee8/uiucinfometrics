@@ -23,25 +23,25 @@ UIUC_PAGE_NOT_FOUND = "http://courses.illinois.edu/pageNotFound.html"
 # Returns array of tuples representing valid semesters (semesters listed on the UIUC website).
 # [(year, semester)]
 def get_archive_semesters():
-	baseUrl = UIUC_COURSE_CATALOG_HOME_URL
+    baseUrl = UIUC_COURSE_CATALOG_HOME_URL
+    
+    br = mechanize.Browser()
+    br.set_handle_robots(False)
+    response = br.open(baseUrl)
+    responseText = response.read()
+    
+    soup = BeautifulSoup(responseText)
+    archiveOptions = soup.find('ul', id='navlist').find('select', id='selectClassSchedule').findAll('option')
 	
-	br = mechanize.Browser()
-	br.set_handle_robots(False)
-	response = br.open(baseUrl)
-	responseText = response.read()
-	
-	soup = BeautifulSoup(responseText)
-	archiveOptions = soup.find('ul', id='navlist').find('select', id='selectClassSchedule').findAll('option')
-	
-	returnList = []
-	
-	for row in archiveOptions:
-		res = re.match(r'/cis/(?P<year>\w+)/(?P<season>\w+)/\w*', row['value'])
+    returnList = []
+    
+    for row in archiveOptions:
+        res = re.match(r'http://courses.illinois.edu/cis/(?P<year>\w+)/(?P<season>\w+)/\w*', row['value'])
 		
-		if res is not None:
-			returnList += [(int(res.group('year')), res.group('season').lower())]
+        if res is not None:
+            returnList += [(int(res.group('year')), res.group('season').lower())]
 			
-	return returnList
+    return returnList
 
 # year: YYYY format
 # season: "summer", "fall", or "spring"

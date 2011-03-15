@@ -45,12 +45,14 @@ rseason = ''
 rsubject = ''
 
 if 'resume' not in sys.argv:
-	resumeTrigger = True
+    resumeTrigger = True
 else:
-	argindex = sys.argv.index('resume')
-	ryear = int(sys.argv[argindex + 2])
-	rseason = sys.argv[argindex + 1]
-	rsubject = sys.argv[argindex + 3]
+    argindex = sys.argv.index('resume')
+    ryear = int(sys.argv[argindex + 2])
+    rseason = sys.argv[argindex + 1]
+    rsubject = sys.argv[argindex + 3]
+    semesters = [(ryear, rseason)]
+    
 
 for year, season in semesters:
 	if season == 'summer':
@@ -70,11 +72,11 @@ for year, season in semesters:
 		iidx += 1
 		
 		# resumeTrigger handling
-		if resumeTrigger is False and subject_code != rsubject:
-			print "Skipping " + season.upper() + " " + str(year) + " " + subject_code.upper() + "..."
-			continue
-		else:
-			resumeTrigger = True
+		#if resumeTrigger is False and subject_code != rsubject:
+		#	print "Skipping " + season.upper() + " " + str(year) + " " + subject_code.upper() + "..."
+		#	continue
+		#else:
+		#	resumeTrigger = True
 		
 		courses = get_subject_courses(year, season, subject_code)
 		time.sleep(0.5)

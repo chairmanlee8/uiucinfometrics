@@ -32,6 +32,12 @@
                 },
                 function(data)
                 {
+                    if("error" in data)
+                    {
+                        $("#body_results").html("SQL input failed validation. Nice try buddy.");
+                        return;
+                    }
+                    
                     if(data.length <= 0)
                     {
                         $("#body_results").html("No results.");

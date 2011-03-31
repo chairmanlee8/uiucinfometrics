@@ -21,8 +21,13 @@
     <style type="text/css">
         body
         {
-            padding: 100px;
+            padding: 50px;
             font-family: "Helvetica";
+        }
+        
+        div.footer
+        {
+            margin-top: 100px;
         }
     </style>
 </head>
@@ -37,19 +42,19 @@
         <form>
             <p>I want to find a 
                 <select name="class_type">
-                    <option>humanities</option>
-                    <option>engineering</option>
+                    <option value="humanities">humanities</option>
+                    <option value="engineering">engineering</option>
                 </select>
                 class that starts at <input type="text" value="10:00 AM" /> and meets on
                 <select name="class_meet">
-                    <option>Monday, Wednesdays, and Fridays</option>
-                    <option>Tuesdays and Thursdays</option>
-                    <option>Mondays and Wednesdays</option>
-                    <option>Monday only</option>
-                    <option>Tuesday only</option>
-                    <option>Wednesday only</option>
-                    <option>Thursday only</option>
-                    <option>Friday only</option>
+                    <option value="MWF">Monday, Wednesdays, and Fridays</option>
+                    <option value="TR">Tuesdays and Thursdays</option>
+                    <option value="MW">Mondays and Wednesdays</option>
+                    <option value="M">Monday only</option>
+                    <option value="T">Tuesday only</option>
+                    <option value="W">Wednesday only</option>
+                    <option value="R">Thursday only</option>
+                    <option value="F">Friday only</option>
                 </select>.
             </p>
             

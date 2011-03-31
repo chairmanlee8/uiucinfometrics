@@ -32,9 +32,31 @@
                 },
                 function(data)
                 {
-                    $("#body_results").html(data);
+                    if(data.length <= 0)
+                    {
+                        $("#body_results").html("No results.");
+                    }
+                    else
+                    {
+                        var resultsHTML = "<table>";
+                        
+                        for(var i in data)
+                        {
+                            resultsHTML += "<tr>";
+                            for(var j in data)
+                            {
+                                resultsHTML += "<td>";
+                                resultsHTML += data[i][j].toString();
+                                resultsHTML += "</td>";
+                            }
+                            resultsHTML += "</tr>";
+                        }
+                        
+                        resultsHTML += "</table>";
+                        $("#body_results").html(resultsHTML);
+                    }
                 },
-                'string'
+                'json'
             );
         }
     </script>

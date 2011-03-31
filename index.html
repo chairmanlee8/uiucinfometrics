@@ -43,12 +43,8 @@
                         for(var i in data)
                         {
                             resultsHTML += "<tr>";
-                            for(var j in data[i])
-                            {
-                                resultsHTML += "<td>";
-                                resultsHTML += data[i][j].toString();
-                                resultsHTML += "</td>";
-                            }
+                            resultsHTML += "<td>" + data[i][2].toString() + data[i][3].toString() + "</td>";
+                            resultsHTML += "<td><a target='_blank' href='http://courses.illinois.edu/cis/" + data[i][0].toString() + "/" + data[i][1].toString() + "/schedule/" + data[i][2].toString() + "/" + data[i][3].toString() + ".html?skinId=2169'>" + data[i][4].toString() + "</a></td>";
                             resultsHTML += "</tr>";
                         }
                         
@@ -71,6 +67,11 @@
         div.footer
         {
             margin-top: 100px;
+        }
+        
+        td
+        {
+            padding: 4px;
         }
     </style>
 </head>

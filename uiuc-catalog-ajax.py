@@ -16,6 +16,31 @@ def to_military(time_string):
 	timeMatch = re.match(r'(?P<hour>\d+):(?P<minute>\d+)\s*(?P<ampm>[AMP]+)', time_string)
 	return (int(timeMatch.group('hour')) % 12 * 100 + int(timeMatch.group('minute')) + (0, 1200)[timeMatch.group('ampm') == 'PM'])
     
+# find_class: returns classes which fit the given parameters
+def find_class(year, season, category, timeStart, days):
+    connection = sqlite.connect(DATABASE_NAME)
+    cursor = connection.cursor()
+    
+    # form the category filter
+    cat_hum = ['AAS','AFRO','AFST','AIS','ANTH','ARCH','ART','ARTD','ARTE','ARTF','ARTH','ARTS','ASST','CHLH','CINE','CLCV','CMN','CW','CWL','EALC','EDPR','EIL','ENGL','ENVS','EOL','EPS','EPSY','ESL','EURO','FAA','GEOG','GER','GLBL','GMC','GS','GWS','HCD','HDES','HDFS','HIST','HRE','HUM','JOUR','JS','LAST','LLS','MDIA','MDVL','MUS','MUSE','NUTR','PHIL','PS','PSYC','REES','REHB','RHET','RLST','RSOC','RST','RUSS','SAME','SCAN','SCR','SLAV','SOC','SPAN','SPED','SWAH','TURK','UKR','WLOF','WRIT','YDSH','ZULU']
+    cat_eng = ['ABE','ACES','AE','ASTR','BIOC','BIOE','BIOL','BIOP','BTW','CB','CDB','CEE','CHBE','CHEM','CPSC','CS','CSE','ECE','ECON','ENG','ENGH','ESE','GE','GEOG','GEOL','HORT','IB','IE','LIS','MATH','MCB','ME','MICR','MSE','NEUR','NPRE','NRES','PATH','PBIO','PHYS','PLPA','STAT','TE','TSM']
+    catpred = ''
+    
+    if category == 'humanities':
+        catpred = 'subject IN ("' + '","'.join(cat_hum) + '")'
+    elif category == 'engineering':
+        catpred = 'subject IN ("' + '","'.join(cat_eng) + '")'
+    else:
+        catpred = ''
+    
+    FIND_CLASS_QUERY = 'SELECT year, semester, subject, number, name FROM (uiuc_sections INNER JOIN uiuc_courses ON uiuc_sections.course_pk=uiuc_courses.pk) WHERE semester="%s" AND year="%s" AND time_start="%s" AND days="%s" %s'
+    formed_query = FIND_CLASS_QUERY % (season, year, timeStart, days, catpred)
+    
+    cursor.execute(formed_query)
+    res = cursor.fetchall()
+    
+    return json.dumps(res)
+    
 # query_class_offers: returns seasons in which the class is offered, for example
 # [ {2010, "spring"}, {2008, "fall"}, ... ]
 def query_class_offers(className):

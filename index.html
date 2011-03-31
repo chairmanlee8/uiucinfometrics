@@ -18,6 +18,27 @@
 
     </script>
     
+    <script type="text/javascript">
+        void process_form()
+        {
+            $.post(
+                'uiuc-catalog-ajax.py/find_class',
+                {
+                    'year': '2011',
+                    'season': 'fall',
+                    'category': $("#class_type").val(),
+                    'timeStart': $("#class_time").val(),
+                    'days': $("#class_meet").val()
+                },
+                function(data)
+                {
+                    $("#body_results").html(data);
+                },
+                'string'
+            );
+        }
+    </script>
+    
     <style type="text/css">
         body
         {
@@ -39,14 +60,15 @@
     </div>
     
     <div class="body">
-        <form>
+        <form onclick="javascript:process_form();">
             <p>I want to find a 
-                <select name="class_type">
+                <select id="class_type">
                     <option value="humanities">humanities</option>
                     <option value="engineering">engineering</option>
+                    <option value="any">(any)</option>
                 </select>
-                class that starts at <input type="text" value="10:00 AM" /> and meets on
-                <select name="class_meet">
+                class that starts at <input type="text" value="10:00 AM" id="class_time" /> and meets on
+                <select id="class_meet">
                     <option value="MWF">Monday, Wednesdays, and Fridays</option>
                     <option value="TR">Tuesdays and Thursdays</option>
                     <option value="MW">Mondays and Wednesdays</option>
@@ -60,6 +82,9 @@
             
             <input type="button" value="Search" />
         </form>
+        
+        <div id="body_results">
+        </div>
     </div>
     
     <div class="footer">

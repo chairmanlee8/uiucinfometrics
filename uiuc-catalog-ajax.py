@@ -27,9 +27,9 @@ def find_class(year, season, category, timeStart, days):
     catpred = ''
     
     if category == 'humanities':
-        catpred = 'subject IN ("' + '","'.join(cat_hum) + '")'
+        catpred = 'AND subject IN ("' + '","'.join(cat_hum) + '")'
     elif category == 'engineering':
-        catpred = 'subject IN ("' + '","'.join(cat_eng) + '")'
+        catpred = 'AND subject IN ("' + '","'.join(cat_eng) + '")'
     else:
         catpred = ''
     

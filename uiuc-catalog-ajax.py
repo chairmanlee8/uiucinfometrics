@@ -33,7 +33,7 @@ def find_class(year, season, category, timeStart, days):
     else:
         catpred = ''
     
-    FIND_CLASS_QUERY = 'SELECT year, semester, subject, number, name FROM (uiuc_sections INNER JOIN uiuc_courses ON uiuc_sections.course_pk=uiuc_courses.pk) WHERE semester="%s" AND year="%s" AND time_start="%s" AND days="%s" %s'
+    FIND_CLASS_QUERY = 'SELECT year, semester, subject, number, name FROM (uiuc_sections INNER JOIN uiuc_courses ON uiuc_sections.course_pk=uiuc_courses.pk) WHERE semester="%s" AND year="%s" AND time_start="%s" AND days="%s" %s GROUP BY name ORDER BY subject ASC'
     formed_query = FIND_CLASS_QUERY % (season, year, timeStart, days, catpred)
     
     cursor.execute(formed_query)

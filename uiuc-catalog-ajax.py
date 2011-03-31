@@ -21,6 +21,9 @@ def find_class(year, season, category, timeStart, days):
     connection = sqlite.connect(DATABASE_NAME)
     cursor = connection.cursor()
     
+    timeMatch = re.match(r'(?P<hour>\d+):(?P<minute>\d+)\s*(?P<ampm>[AMP]+)', timeStart)
+    timeStart = '%02d:%02d %s' % (int(timeMatch.group('hour')), int(timeMatch.group('minute')), timeMatch.group('ampm'))
+    
     # form the category filter
     cat_hum = ['AAS','AFRO','AFST','AIS','ANTH','ARCH','ART','ARTD','ARTE','ARTF','ARTH','ARTS','ASST','CHLH','CINE','CLCV','CMN','CW','CWL','EALC','EDPR','EIL','ENGL','ENVS','EOL','EPS','EPSY','ESL','EURO','FAA','GEOG','GER','GLBL','GMC','GS','GWS','HCD','HDES','HDFS','HIST','HRE','HUM','JOUR','JS','LAST','LLS','MDIA','MDVL','MUS','MUSE','NUTR','PHIL','PS','PSYC','REES','REHB','RHET','RLST','RSOC','RST','RUSS','SAME','SCAN','SCR','SLAV','SOC','SPAN','SPED','SWAH','TURK','UKR','WLOF','WRIT','YDSH','ZULU']
     cat_eng = ['ABE','ACES','AE','ASTR','BIOC','BIOE','BIOL','BIOP','BTW','CB','CDB','CEE','CHBE','CHEM','CPSC','CS','CSE','ECE','ECON','ENG','ENGH','ESE','GE','GEOG','GEOL','HORT','IB','IE','LIS','MATH','MCB','ME','MICR','MSE','NEUR','NPRE','NRES','PATH','PBIO','PHYS','PLPA','STAT','TE','TSM']

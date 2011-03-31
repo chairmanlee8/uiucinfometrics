@@ -22,7 +22,7 @@ def find_class(year, season, category, timeStart, days):
     cursor = connection.cursor()
     
     # validate input data
-    if re.search(r'[^a-zA-Z:0-9]', year + season + category + timeStart + days):
+    if re.search(r'[^a-zA-Z:0-9]+', year + season + category + timeStart + days):
         return json.dumps({'error': 'sql'})
     
     timeMatch = re.match(r'(?P<hour>\d+):(?P<minute>\d+)\s*(?P<ampm>[AMP]+)', timeStart)
